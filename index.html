@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>シンプル掲示板</title>
+    <title>コアフロー | プロセス最適化と戦略コンサルティング情報サイト</title>
     <style>
         * {
             margin: 0;
@@ -12,481 +12,474 @@
         }
 
         body {
-            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            background: linear-gradient(145deg, #0b2b2b 0%, #0a1f1f 100%);
-            min-height: 100vh;
-            padding: 2rem 1rem;
-            color: #eef4ff;
+            font-family: 'Segoe UI', 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+            background: #f4f7fc;
+            color: #1e2a3e;
+            line-height: 1.5;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: rgba(22, 34, 48, 0.75);
-            backdrop-filter: blur(2px);
-            border-radius: 2rem;
-            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(120, 200, 220, 0.2);
-            overflow: hidden;
-            padding: 1.5rem;
-        }
-
-        h1 {
-            font-size: 1.8rem;
-            font-weight: 600;
-            background: linear-gradient(135deg, #d4f1f9, #9ad0e6);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            margin-bottom: 0.25rem;
-            display: inline-block;
-        }
-
-        .sub {
-            color: #8aaec0;
-            font-size: 0.85rem;
-            margin-bottom: 1.5rem;
-            border-left: 3px solid #3c9faf;
-            padding-left: 0.75rem;
-        }
-
-        /* 入力エリア */
-        .input-card {
-            background: #0f212e;
-            border-radius: 1.5rem;
-            padding: 1.2rem;
-            margin-bottom: 2rem;
-            border: 1px solid #2c5468;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-        }
-
-        .input-group {
-            margin-bottom: 1rem;
-        }
-
-        label {
-            display: block;
-            font-size: 0.8rem;
-            font-weight: 500;
-            letter-spacing: 1px;
-            color: #b4dfee;
-            margin-bottom: 0.4rem;
-        }
-
-        input, textarea {
-            width: 100%;
-            background: #07161f;
-            border: 1px solid #2f6b7a;
-            border-radius: 1.2rem;
-            padding: 0.8rem 1rem;
-            font-size: 1rem;
-            color: #f0fcff;
-            font-family: inherit;
-            transition: all 0.2s;
-        }
-
-        input:focus, textarea:focus {
-            outline: none;
-            border-color: #6ed3ff;
-            box-shadow: 0 0 0 2px rgba(80, 200, 240, 0.3);
-            background: #0a1a24;
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 85px;
-        }
-
-        .char-count {
-            text-align: right;
-            font-size: 0.7rem;
-            color: #7c9eb0;
-            margin-top: 0.3rem;
-        }
-
-        button {
-            background: linear-gradient(95deg, #1f6d7c, #0e4b5e);
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 2rem;
-            font-weight: bold;
-            font-size: 1rem;
+        /* ヘッダー */
+        .main-header {
+            background: linear-gradient(135deg, #0b2b3b 0%, #1a4a5f 100%);
             color: white;
-            cursor: pointer;
-            transition: 0.2s;
-            width: 100%;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-            margin-top: 0.5rem;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .main-header h1 {
+            font-size: 2.4rem;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+        .main-header p {
+            font-size: 1.1rem;
+            margin-top: 0.75rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .core-tagline {
+            background: rgba(255,255,240,0.15);
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            backdrop-filter: blur(2px);
         }
 
-        button:hover {
-            background: linear-gradient(95deg, #278e9e, #136475);
-            transform: scale(0.98);
-            box-shadow: 0 1px 3px black;
-        }
-
-        /* 掲示板スタイル */
-        .board-header {
+        /* コンセプトセクション（戦略的メッセージ） */
+        .concept-section {
+            max-width: 1200px;
+            margin: 2rem auto 1rem;
+            padding: 0 1.5rem;
             display: flex;
-            justify-content: space-between;
-            align-items: baseline;
             flex-wrap: wrap;
-            margin-bottom: 1rem;
-            border-bottom: 2px dashed #2f6f7a;
-            padding-bottom: 0.5rem;
+            gap: 1.5rem;
+            justify-content: center;
         }
-
-        .message-count {
-            background: #0b2f3a;
-            padding: 0.2rem 0.8rem;
+        .concept-card {
+            background: white;
+            border-radius: 28px;
+            padding: 1.5rem;
+            flex: 1;
+            min-width: 220px;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s;
+            border: 1px solid #e2edf2;
+        }
+        .concept-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 18px 28px rgba(0,0,0,0.1);
+        }
+        .concept-icon {
+            font-size: 2.2rem;
+            margin-bottom: 0.75rem;
+        }
+        .concept-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #155f73;
+        }
+        .concept-card p {
+            color: #2c3e44;
+            font-size: 0.9rem;
+        }
+        .badge-solution {
+            display: inline-block;
+            background: #eef2fc;
+            padding: 0.2rem 0.7rem;
             border-radius: 20px;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: bold;
+            margin-top: 0.8rem;
+            color: #1a6d85;
         }
 
-        .messages-list {
+        /* ニュースグリッド（40件） */
+        .news-container {
+            max-width: 1300px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            border-left: 6px solid #1f7f8c;
+            padding-left: 1rem;
+            margin-bottom: 1.8rem;
+            color: #0a3b44;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.8rem;
+        }
+        .news-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 5px 14px rgba(0,0,0,0.07);
+            transition: all 0.25s;
+            cursor: pointer;
             display: flex;
             flex-direction: column;
-            gap: 1rem;
-            max-height: 500px;
-            overflow-y: auto;
-            padding-right: 0.3rem;
+            border: 1px solid #e0edf2;
         }
-
-        .message-card {
-            background: #102b33c9;
-            border-radius: 1.2rem;
-            padding: 1rem;
-            border-left: 5px solid #3cb0c0;
-            transition: 0.1s;
-            backdrop-filter: blur(4px);
-            word-break: break-word;
+        .news-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.2);
         }
-
-        .message-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            flex-wrap: wrap;
-            margin-bottom: 0.5rem;
-            font-size: 0.85rem;
+        .news-img {
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+            background: #cbdbe6;
+            display: block;
         }
-
-        .username {
-            font-weight: bold;
-            color: #bbe9ff;
-            background: #0d404e;
-            padding: 0.2rem 0.8rem;
-            border-radius: 30px;
-            font-size: 0.8rem;
+        .news-content {
+            padding: 1.2rem 1.2rem 1.5rem;
+            flex: 1;
         }
-
-        .date {
-            font-size: 0.65rem;
-            color: #9ebecb;
-        }
-
-        .message-text {
-            line-height: 1.45;
-            margin: 0.6rem 0 0.4rem 0;
-            white-space: pre-wrap;
-        }
-
-        .delete-btn {
-            background: none;
-            border: none;
-            color: #f3a683;
+        .news-category {
             font-size: 0.7rem;
-            cursor: pointer;
-            padding: 0;
-            width: auto;
-            box-shadow: none;
-            text-decoration: underline;
-            margin-top: 0.4rem;
-            text-align: right;
-            display: inline-block;
-            width: auto;
+            text-transform: uppercase;
+            color: #1f7f8c;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
         }
-
-        .delete-btn:hover {
-            background: none;
-            transform: none;
-            color: #ff8c5a;
-            text-decoration: none;
+        .news-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            line-height: 1.4;
+            color: #102b33;
         }
-
-        .empty-message {
+        .news-summary {
+            font-size: 0.85rem;
+            color: #2f5b66;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .read-more {
+            margin-top: 0.9rem;
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: #1f7f8c;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .footer-note {
             text-align: center;
             padding: 2rem;
-            color: #98bac8;
-            background: #071a1f70;
-            border-radius: 1.5rem;
-            font-style: italic;
+            background: #e9f0f3;
+            margin-top: 2rem;
+            font-size: 0.8rem;
+            color: #3a6b78;
         }
 
-        footer {
-            margin-top: 1.5rem;
-            text-align: center;
-            font-size: 0.7rem;
-            color: #5d8a9b;
+        /* モーダル (詳細表示) */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
         }
-
-        ::-webkit-scrollbar {
-            width: 6px;
+        .modal-content {
+            background: white;
+            max-width: 750px;
+            width: 100%;
+            max-height: 85vh;
+            border-radius: 32px;
+            overflow-y: auto;
+            box-shadow: 0 25px 40px rgba(0,0,0,0.3);
+            animation: fadeSlideUp 0.2s ease;
         }
-        ::-webkit-scrollbar-track {
-            background: #0b2a30;
-            border-radius: 10px;
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        ::-webkit-scrollbar-thumb {
-            background: #338896;
-            border-radius: 10px;
+        .modal-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            background: #b5c9d0;
+        }
+        .modal-text {
+            padding: 1.8rem;
+        }
+        .modal-text h2 {
+            font-size: 1.7rem;
+            margin-bottom: 0.8rem;
+            color: #0f3f4a;
+        }
+        .modal-meta {
+            display: flex;
+            gap: 12px;
+            font-size: 0.75rem;
+            color: #5a7f8a;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #dee9ed;
+            padding-bottom: 0.6rem;
+        }
+        .modal-desc {
+            line-height: 1.6;
+            color: #1f3b42;
+            font-size: 0.98rem;
+        }
+        .close-modal {
+            display: inline-block;
+            margin-top: 1.8rem;
+            background: #155f73;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 40px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+        .close-modal:hover {
+            background: #0e4555;
+        }
+        .modal-close-top {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            float: right;
+            cursor: pointer;
+            margin: 0.8rem;
+            color: #555;
+        }
+        @media (max-width: 640px) {
+            .main-header h1 { font-size: 1.8rem; }
+            .section-title { font-size: 1.4rem; }
+            .modal-text h2 { font-size: 1.3rem; }
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <h1>📢 ひと言掲示板</h1>
-    <div class="sub">アクセスしたら自由にメッセージを投稿・共有できます</div>
+<header class="main-header">
+    <h1>CORE FLOW</h1>
+    <p>プロセス最適化の実践例 — 高価なタンク/ローリー、シームレス状況でリニュースを整備。<br>
+    高価なアナリティクスとAI、フローサイトのインサイト、適性設定を実現。</p>
+    <div class="core-tagline">戦略コンサルティング ベストプラクティス | クラッド統合・セキュリティまで自動提案</div>
+</header>
 
-    <div class="input-card">
-        <div class="input-group">
-            <label>✍️ 名前 (ニックネーム)</label>
-            <input type="text" id="usernameInput" maxlength="30" placeholder="例: 旅人 / 名無しさん" autocomplete="off">
+<section class="concept-section">
+    <div class="concept-card">
+        <div class="concept-icon">⚙️</div>
+        <h3>プロセス最適化</h3>
+        <p>高価なタンク/ローリー運用をAIで可視化。シームレスなリニュース整備とコアフロー効率化。</p>
+        <span class="badge-solution">ソリューション提案 →</span>
+    </div>
+    <div class="concept-card">
+        <div class="concept-icon">📊</div>
+        <h3>Analytics + AI</h3>
+        <p>フローサイトのインサイトから適性設定を実現。予測型アナリティクスで変革をリード。</p>
+        <span class="badge-solution">ソリューション提案 →</span>
+    </div>
+    <div class="concept-card">
+        <div class="concept-icon">🔒</div>
+        <h3>クラッド統合セキュリティ</h3>
+        <p>抽選後のダメリティを探し、自動的にさらなる提案。エンドツーエンドのガバナンス。</p>
+        <span class="badge-solution">自動提案機能</span>
+    </div>
+</section>
+
+<main class="news-container">
+    <div class="section-title">📰 日本トレンド・ビジネスニュース 40選</div>
+    <div class="grid" id="newsGrid"></div>
+</main>
+
+<footer class="footer-note">
+    © 2025 CORE FLOW — 戦略コンサルティングのベストプラクティス | 詳細検討はお問い合わせください
+</footer>
+
+<!-- モーダル構造 -->
+<div id="detailModal" class="modal">
+    <div class="modal-content">
+        <button class="modal-close-top" id="closeModalBtn">&times;</button>
+        <img id="modalImage" class="modal-img" src="" alt="detail image">
+        <div class="modal-text">
+            <h2 id="modalTitle"></h2>
+            <div class="modal-meta"><span id="modalCategory"></span><span>📅 最新インサイト</span></div>
+            <div id="modalDescription" class="modal-desc"></div>
+            <button class="close-modal" id="modalCloseFooter">詳細を閉じる</button>
         </div>
-        <div class="input-group">
-            <label>💬 メッセージ</label>
-            <textarea id="messageInput" maxlength="300" placeholder="ここにメッセージを入力してください (最大300文字)"></textarea>
-            <div class="char-count"><span id="charCount">0</span> / 300</div>
-        </div>
-        <button id="sendBtn">📨 メッセージを投稿</button>
     </div>
-
-    <div class="board-header">
-        <span>📋 掲示板ログ</span>
-        <span class="message-count" id="msgCount">0件</span>
-    </div>
-
-    <div id="messageBoard" class="messages-list">
-        <!-- 動的にメッセージが表示される -->
-        <div class="empty-message">✨ 最初のメッセージを投稿してみましょう！</div>
-    </div>
-    <footer>※ データはお使いのブラウザに保存されます。ページを閉じても残ります。</footer>
 </div>
 
 <script>
-    (function(){
-        // ストレージキー
-        const STORAGE_KEY = 'simple_bulletin_messages';
+    // ---------- 40件の日本に関するニュース/トピック (各タイトル・本文・画像・カテゴリをリアルに設定) ----------
+    // 画像は Unsplash の関連写真イメージを利用 (日本風景・テクノロジー・工場・都市など)
+    // 各ニュースには日本の出来事・経済・DX・地方創生・製造業・AIなど多様な話題を盛り込む
+    const generateNewsData = () => {
+        const baseTitles = [
+            "経済産業省、次世代半導体戦略を発表", "トヨタ、全固体電池の量産工場を2030年までに建設", "NTTとKDDI、6G共同実証実験を開始",
+            "訪日外国人客数、過去最高を更新", "政府、AIガイドライン改定で生成AI活用推進", "三菱重工、水素エンジン大型トラック実証",
+            "ソニー・ホンダモビリティ、EV新型モデル公開", "大阪・関西万博、パビリオン建設最終段階", "東京都、完全データ連携バスシステム導入",
+            "日立製作所、量子コンピュータのクラウド提供", "ローソン、AI需要予測で食品ロス30%削減", "九州電力、洋上風力発電所を着工",
+            "トヨタ自動車、燃料電池車新型モデル発売", "JR東日本、水素ハイブリッド電車開発", "三井物産、アンモニア混焼発電実証開始",
+            "NEC、顔認証技術で空港手続き完全自動化", "セブン＆アイ、DXで店舗最適配置モデル", "パナソニック、EV電池工場を米国と連携",
+            "日本IBM、金融機関向け生成AIプラットフォーム", "富士通、気象予測AIで災害対策支援", "国土交通省、インフラ点検ドローン全国展開",
+            "トヨタ紡織、リサイクル素材シート量産", "大林組、宇宙エレベーター技術実証へ", "日本郵政、地域物流AI最適化システム",
+            "シャープ、電子ペーパー活用スマート工場", "ヤマト運輸、EVトラック配送網拡大", "JAL、SAF燃料導入で脱炭素加速",
+            "ANA、空港地上走行自動化実証実験", "メルカリ、AI査定サービス導入", "LINEヤフー、地域防災アプリ連携強化",
+            "オリンパス、内視鏡AI診断支援承認", "第一三共、がん新薬米国承認", "資生堂、肌解析AIでパーソナライズ化粧品",
+            "味の素、発酵技術で代替肉開発", "キリンホールディングス、健康科学領域拡大", "東芝、再エネ水素自営ライン稼働",
+            "SUBARU、レベル4自動運転実証", "マツダ、ロータリーエンジンEVレンジエクステンダー", "カシオ、AI学習ソリューション提供"
+        ];
+        // 厳密に40タイトル用意 (上記は39個のため1個追加)
+        const fullTitles = [...baseTitles, "サントリー、AIで新商品フレーバー開発"];
+        if(fullTitles.length !== 40) console.warn("タイトル数調整", fullTitles.length);
+        // 補正: 現在40件であることを保証
+        while(fullTitles.length < 40) fullTitles.push("日本産業DX推進会議、最新ロードマップ公表");
+        while(fullTitles.length > 40) fullTitles.pop();
         
-        // DOM 要素
-        const usernameInput = document.getElementById('usernameInput');
-        const messageInput = document.getElementById('messageInput');
-        const sendBtn = document.getElementById('sendBtn');
-        const messageBoard = document.getElementById('messageBoard');
-        const msgCountSpan = document.getElementById('msgCount');
-        const charCountSpan = document.getElementById('charCount');
-
-        // メッセージ配列 { id, username, text, timestamp }
-        let messages = [];
-
-        // ----- ローカルストレージから読み込み -----
-        function loadMessages() {
-            const stored = localStorage.getItem(STORAGE_KEY);
-            if(stored) {
-                try {
-                    const parsed = JSON.parse(stored);
-                    if(Array.isArray(parsed)) {
-                        messages = parsed;
-                    } else {
-                        messages = [];
-                    }
-                } catch(e) {
-                    messages = [];
-                }
-            } else {
-                // 初期サンプルメッセージ (なくてもOK)
-                messages = [];
-            }
-            // 念のためソート (新しい順に表示したいので降順)
-            messages.sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
-            renderBoard();
-        }
-
-        // ----- 保存 (localStorage同期) -----
-        function saveMessages() {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
-            updateMessageCount();
-        }
-
-        // ----- 件数表示更新 -----
-        function updateMessageCount() {
-            msgCountSpan.innerText = messages.length + '件';
-        }
-
-        // ----- 掲示板描画 -----
-        function renderBoard() {
-            if(!messageBoard) return;
-            
-            if(messages.length === 0) {
-                messageBoard.innerHTML = `<div class="empty-message">📭 まだ投稿はありません。一番乗りしよう！</div>`;
-                updateMessageCount();
-                return;
-            }
-            
-            // 新しい順に表示（すでにソート済みだが安全のため再ソート）
-            const sorted = [...messages].sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
-            
-            let html = '';
-            for(let msg of sorted) {
-                const dateObj = new Date(msg.timestamp);
-                const formattedDate = `${dateObj.getFullYear()}/${(dateObj.getMonth()+1).toString().padStart(2,'0')}/${dateObj.getDate().toString().padStart(2,'0')} ${dateObj.getHours().toString().padStart(2,'0')}:${dateObj.getMinutes().toString().padStart(2,'0')}`;
-                
-                // XSS 対策: テキストをエスケープ
-                const safeUsername = escapeHtml(msg.username) || '名無し';
-                const safeText = escapeHtml(msg.text);
-                
-                html += `
-                    <div class="message-card" data-id="${msg.id}">
-                        <div class="message-header">
-                            <span class="username">${safeUsername}</span>
-                            <span class="date">${formattedDate}</span>
-                        </div>
-                        <div class="message-text">${safeText}</div>
-                        <button class="delete-btn" data-id="${msg.id}">🗑 削除</button>
-                    </div>
-                `;
-            }
-            messageBoard.innerHTML = html;
-            
-            // 削除ボタンにイベントを再バインド
-            document.querySelectorAll('.delete-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    const id = btn.getAttribute('data-id');
-                    if(id) deleteMessageById(id);
-                });
-            });
-            
-            updateMessageCount();
-        }
+        // カテゴリバリエーション
+        const categories = ["プロセス革新", "AI・Analytics", "クリーンエネルギー", "モビリティ", "DX戦略", "セキュリティ", "ヘルステック", "素材技術"];
         
-        // シンプルなXSSエスケープ
-        function escapeHtml(str) {
-            if(!str) return '';
-            return str.replace(/[&<>]/g, function(m) {
-                if(m === '&') return '&amp;';
-                if(m === '<') return '&lt;';
-                if(m === '>') return '&gt;';
-                return m;
-            }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
-                return c;
+        // 画像リスト (日本の雰囲気/工場/テクノロジー/都市風景等 unsplash 商用許容イメージ)
+        const imagePool = [
+            "https://picsum.photos/id/20/400/250", "https://picsum.photos/id/21/400/250", "https://picsum.photos/id/24/400/250",
+            "https://picsum.photos/id/26/400/250", "https://picsum.photos/id/28/400/250", "https://picsum.photos/id/29/400/250",
+            "https://picsum.photos/id/33/400/250", "https://picsum.photos/id/34/400/250", "https://picsum.photos/id/36/400/250",
+            "https://picsum.photos/id/38/400/250", "https://picsum.photos/id/39/400/250", "https://picsum.photos/id/42/400/250",
+            "https://picsum.photos/id/43/400/250", "https://picsum.photos/id/44/400/250", "https://picsum.photos/id/45/400/250",
+            "https://picsum.photos/id/47/400/250", "https://picsum.photos/id/48/400/250", "https://picsum.photos/id/55/400/250",
+            "https://picsum.photos/id/58/400/250", "https://picsum.photos/id/59/400/250", "https://picsum.photos/id/60/400/250",
+            "https://picsum.photos/id/62/400/250", "https://picsum.photos/id/65/400/250", "https://picsum.photos/id/66/400/250",
+            "https://picsum.photos/id/68/400/250", "https://picsum.photos/id/71/400/250", "https://picsum.photos/id/73/400/250",
+            "https://picsum.photos/id/75/400/250", "https://picsum.photos/id/76/400/250", "https://picsum.photos/id/77/400/250",
+            "https://picsum.photos/id/79/400/250", "https://picsum.photos/id/80/400/250", "https://picsum.photos/id/81/400/250",
+            "https://picsum.photos/id/84/400/250", "https://picsum.photos/id/85/400/250", "https://picsum.photos/id/86/400/250",
+            "https://picsum.photos/id/87/400/250", "https://picsum.photos/id/88/400/250", "https://picsum.photos/id/89/400/250",
+            "https://picsum.photos/id/90/400/250"
+        ];
+        
+        // 各ニュースの詳細本文 (日本関連の詳細)
+        const generateDescription = (title, idx) => {
+            const topics = [
+                `CORE FLOWの視点から見ると、この取り組みはプロセス最適化の典型例です。${title}により、業界構造が変革し、アナリティクスとAIによる適性設定が促進されます。高価な設備投資のシームレス運用が期待されます。`,
+                `戦略コンサルティングとしてベストプラクティスを適用。${title}に関連し、クラッド統合セキュリティや抽選後メリットを自動提案。さらなる最適化が可能です。`,
+                `AIとリアルタイムデータ連携で、現場のフローサイトインサイトを強化。${title}は日本市場における新たなスタンダードを形成し、コアフローの価値を高めます。`,
+                `詳細検討フェーズでは、当社の高価値アナリティクスソリューションを組み合わせ、リニュース整備を加速。${title}の事例はモデルケースとなります。`,
+                `自動提案エンジンにより、セキュリティリスク低減とコスト削減を両立。${title}から得られる知見で、さらなるDX推進を実現します。`
+            ];
+            return topics[ idx % topics.length ] + ` 本件は日本国内の複数拠点で展開され、2025年度中の本格稼働を目指しています。CORE FLOWはプロセス可視化と継続的改善をサポートします。`;
+        };
+        
+        const newsItems = [];
+        for(let i=0; i<40; i++) {
+            const title = fullTitles[i];
+            const category = categories[i % categories.length];
+            const imgUrl = imagePool[i % imagePool.length];
+            const summary = `${title}に関連して、国内初の実証実験または制度改正が進行。AI解析や高度計測により生産性向上が期待されます。`;
+            const detailedDesc = generateDescription(title, i);
+            newsItems.push({
+                id: i,
+                title: title,
+                category: category,
+                image: imgUrl,
+                summary: summary,
+                fullDescription: detailedDesc
             });
         }
-        
-        // ----- メッセージ削除機能 -----
-        function deleteMessageById(id) {
-            const beforeCount = messages.length;
-            messages = messages.filter(msg => msg.id !== id);
-            if(messages.length !== beforeCount) {
-                saveMessages();
-                renderBoard();
-            }
-        }
-        
-        // ----- 新規メッセージ投稿 -----
-        function postMessage() {
-            let username = usernameInput.value.trim();
-            let text = messageInput.value.trim();
-            
-            // バリデーション
-            if(text === "") {
-                alert("メッセージ内容を入力してください");
-                return;
-            }
-            if(username === "") {
-                username = "名無しさん";
-            }
-            if(username.length > 30) {
-                username = username.substring(0,30);
-            }
-            if(text.length > 300) {
-                alert("メッセージは300文字以内にしてください");
-                return;
-            }
-            
-            const newMessage = {
-                id: Date.now() + '-' + Math.random().toString(36).substring(2, 8),
-                username: username,
-                text: text,
-                timestamp: new Date().toISOString()
-            };
-            
-            messages.unshift(newMessage);  // 配列先頭に追加（新しい順で表示したいため）
-            // ただし全体を新しい順に保つために render でソートするのでOK
-            saveMessages();
-            renderBoard();
-            
-            // 入力欄クリア
-            messageInput.value = "";
-            usernameInput.value = username;  // 名無し補完した場合も表示維持
-            updateCharCount();
-            
-            // ちょっとした演出：スクロール
-            if(messageBoard.firstChild) {
-                messageBoard.scrollTop = 0;
-            }
-        }
-        
-        // 文字カウンター更新
-        function updateCharCount() {
-            const len = messageInput.value.length;
-            charCountSpan.innerText = len;
-            if(len > 280) {
-                charCountSpan.style.color = "#ffb347";
-            } else {
-                charCountSpan.style.color = "#7c9eb0";
-            }
-        }
-        
-        // 初期化とイベントリスナー
-        function init() {
-            loadMessages();
-            
-            sendBtn.addEventListener('click', () => {
-                postMessage();
+        return newsItems;
+    };
+    
+    const newsData = generateNewsData();
+    
+    // グリッド描画
+    const gridContainer = document.getElementById('newsGrid');
+    
+    function renderCards() {
+        gridContainer.innerHTML = '';
+        newsData.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'news-card';
+            card.setAttribute('data-id', item.id);
+            card.innerHTML = `
+                <img class="news-img" src="${item.image}" alt="${item.title}" loading="lazy">
+                <div class="news-content">
+                    <div class="news-category">${item.category}</div>
+                    <div class="news-title">${item.title}</div>
+                    <div class="news-summary">${item.summary}</div>
+                    <div class="read-more">詳細を見る →</div>
+                </div>
+            `;
+            card.addEventListener('click', (e) => {
+                e.stopPropagation();
+                openModal(item.id);
             });
-            
-            messageInput.addEventListener('input', () => {
-                updateCharCount();
-                if(messageInput.value.length > 300) {
-                    messageInput.value = messageInput.value.substring(0,300);
-                    updateCharCount();
-                }
-            });
-            
-            usernameInput.addEventListener('input', () => {
-                if(usernameInput.value.length > 30) {
-                    usernameInput.value = usernameInput.value.substring(0,30);
-                }
-            });
-            
-            // エンターキーで投稿 (ctrl+enter でも可)
-            messageInput.addEventListener('keydown', (e) => {
-                if(e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
-                    e.preventDefault();
-                    postMessage();
-                } else if(e.key === 'Enter' && !e.shiftKey) {
-                    // 普通のEnterで送信したい場合は好みだが、改行したい場合とぶつかるため、Ctrl+Enterにしておく
-                    // 好みで単体Enterも可。今回は普通Enterは改行、Ctrl+Enterで送信とする。
-                    // そのままでOK
-                }
-            });
-            
-            updateCharCount();
+            gridContainer.appendChild(card);
+        });
+    }
+    
+    // モーダル制御
+    const modal = document.getElementById('detailModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalCategorySpan = document.getElementById('modalCategory');
+    const modalDescription = document.getElementById('modalDescription');
+    
+    let currentOpenId = null;
+    
+    function openModal(id) {
+        const item = newsData.find(i => i.id === id);
+        if(!item) return;
+        currentOpenId = id;
+        modalImage.src = item.image;
+        modalTitle.innerText = item.title;
+        modalCategorySpan.innerText = item.category + " ｜ コアフロー戦略レポート";
+        modalDescription.innerText = item.fullDescription;
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closeModalFn() {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+        currentOpenId = null;
+    }
+    
+    // イベント設定
+    document.getElementById('closeModalBtn').addEventListener('click', closeModalFn);
+    document.getElementById('modalCloseFooter').addEventListener('click', closeModalFn);
+    modal.addEventListener('click', (e) => {
+        if(e.target === modal) closeModalFn();
+    });
+    
+    // 初期化
+    renderCards();
+    
+    // 追加でキーボードESC閉じる
+    document.addEventListener('keydown', (e) => {
+        if(e.key === 'Escape' && modal.style.display === 'flex') {
+            closeModalFn();
         }
-        
-        init();
-    })();
+    });
+    
+    // コンソールに40件情報を表示
+    console.log(`CORE FLOW 情報サイト: ${newsData.length}件の日本ニュースを表示しています。`);
 </script>
 </body>
 </html>
