@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>シンプル掲示板</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #0b2b2b 0%, #0a1f1f 100%);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            color: #eef4ff;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(22, 34, 48, 0.75);
+            backdrop-filter: blur(2px);
+            border-radius: 2rem;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(120, 200, 220, 0.2);
+            overflow: hidden;
+            padding: 1.5rem;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #d4f1f9, #9ad0e6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.25rem;
+            display: inline-block;
+        }
+
+        .sub {
+            color: #8aaec0;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+            border-left: 3px solid #3c9faf;
+            padding-left: 0.75rem;
+        }
+
+        /* 入力エリア */
+        .input-card {
+            background: #0f212e;
+            border-radius: 1.5rem;
+            padding: 1.2rem;
+            margin-bottom: 2rem;
+            border: 1px solid #2c5468;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+
+        .input-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            color: #b4dfee;
+            margin-bottom: 0.4rem;
+        }
+
+        input, textarea {
+            width: 100%;
+            background: #07161f;
+            border: 1px solid #2f6b7a;
+            border-radius: 1.2rem;
+            padding: 0.8rem 1rem;
+            font-size: 1rem;
+            color: #f0fcff;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #6ed3ff;
+            box-shadow: 0 0 0 2px rgba(80, 200, 240, 0.3);
+            background: #0a1a24;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 85px;
+        }
+
+        .char-count {
+            text-align: right;
+            font-size: 0.7rem;
+            color: #7c9eb0;
+            margin-top: 0.3rem;
+        }
+
+        button {
+            background: linear-gradient(95deg, #1f6d7c, #0e4b5e);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 2rem;
+            font-weight: bold;
+            font-size: 1rem;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+            width: 100%;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            margin-top: 0.5rem;
+        }
+
+        button:hover {
+            background: linear-gradient(95deg, #278e9e, #136475);
+            transform: scale(0.98);
+            box-shadow: 0 1px 3px black;
+        }
+
+        /* 掲示板スタイル */
+        .board-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+            border-bottom: 2px dashed #2f6f7a;
+            padding-bottom: 0.5rem;
+        }
+
+        .message-count {
+            background: #0b2f3a;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .messages-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 0.3rem;
+        }
+
+        .message-card {
+            background: #102b33c9;
+            border-radius: 1.2rem;
+            padding: 1rem;
+            border-left: 5px solid #3cb0c0;
+            transition: 0.1s;
+            backdrop-filter: blur(4px);
+            word-break: break-word;
+        }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        .username {
+            font-weight: bold;
+            color: #bbe9ff;
+            background: #0d404e;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+        }
+
+        .date {
+            font-size: 0.65rem;
+            color: #9ebecb;
+        }
+
+        .message-text {
+            line-height: 1.45;
+            margin: 0.6rem 0 0.4rem 0;
+            white-space: pre-wrap;
+        }
+
+        .delete-btn {
+            background: none;
+            border: none;
+            color: #f3a683;
+            font-size: 0.7rem;
+            cursor: pointer;
+            padding: 0;
+            width: auto;
+            box-shadow: none;
+            text-decoration: underline;
+            margin-top: 0.4rem;
+            text-align: right;
+            display: inline-block;
+            width: auto;
+        }
+
+        .delete-btn:hover {
+            background: none;
+            transform: none;
+            color: #ff8c5a;
+            text-decoration: none;
+        }
+
+        .empty-message {
+            text-align: center;
+            padding: 2rem;
+            color: #98bac8;
+            background: #071a1f70;
+            border-radius: 1.5rem;
+            font-style: italic;
+        }
+
+        footer {
+            margin-top: 1.5rem;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #5d8a9b;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b2a30;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #338896;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>📢 ひと言掲示板</h1>
+    <div class="sub">アクセスしたら自由にメッセージを投稿・共有できます</div>
+
+    <div class="input-card">
+        <div class="input-group">
+            <label>✍️ 名前 (ニックネーム)</label>
+            <input type="text" id="usernameInput" maxlength="30" placeholder="例: 旅人 / 名無しさん" autocomplete="off">
+        </div>
+        <div class="input-group">
+            <label>💬 メッセージ</label>
+            <textarea id="messageInput" maxlength="300" placeholder="ここにメッセージを入力してください (最大300文字)"></textarea>
+            <div class="char-count"><span id="charCount">0</span> / 300</div>
+        </div>
+        <button id="sendBtn">📨 メッセージを投稿</button>
+    </div>
+
+    <div class="board-header">
+        <span>📋 掲示板ログ</span>
+        <span class="message-count" id="msgCount">0件</span>
+    </div>
+
+    <div id="messageBoard" class="messages-list">
+        <!-- 動的にメッセージが表示される -->
+        <div class="empty-message">✨ 最初のメッセージを投稿してみましょう！</div>
+    </div>
+    <footer>※ データはお使いのブラウザに保存されます。ページを閉じても残ります。</footer>
+</div>
+
+<script>
+    (function(){
+        // ストレージキー
+        const STORAGE_KEY = 'simple_bulletin_messages';
+        
+        // DOM 要素
+        const usernameInput = document.getElementById('usernameInput');
+        const messageInput = document.getElementById('messageInput');
+        const sendBtn = document.getElementById('sendBtn');
+        const messageBoard = document.getElementById('messageBoard');
+        const msgCountSpan = document.getElementById('msgCount');
+        const charCountSpan = document.getElementById('charCount');
+
+        // メッセージ配列 { id, username, text, timestamp }
+        let messages = [];
+
+        // ----- ローカルストレージから読み込み -----
+        function loadMessages() {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            if(stored) {
+                try {
+                    const parsed = JSON.parse(stored);
+                    if(Array.isArray(parsed)) {
+                        messages = parsed;
+                    } else {
+                        messages = [];
+                    }
+                } catch(e) {
+                    messages = [];
+                }
+            } else {
+                // 初期サンプルメッセージ (なくてもOK)
+                messages = [];
+            }
+            // 念のためソート (新しい順に表示したいので降順)
+            messages.sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
+            renderBoard();
+        }
+
+        // ----- 保存 (localStorage同期) -----
+        function saveMessages() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+            updateMessageCount();
+        }
+
+        // ----- 件数表示更新 -----
+        function updateMessageCount() {
+            msgCountSpan.innerText = messages.length + '件';
+        }
+
+        // ----- 掲示板描画 -----
+        function renderBoard() {
+            if(!messageBoard) return;
+            
+            if(messages.length === 0) {
+                messageBoard.innerHTML = `<div class="empty-message">📭 まだ投稿はありません。一番乗りしよう！</div>`;
+                updateMessageCount();
+                return;
+            }
+            
+            // 新しい順に表示（すでにソート済みだが安全のため再ソート）
+            const sorted = [...messages].sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
+            
+            let html = '';
+            for(let msg of sorted) {
+                const dateObj = new Date(msg.timestamp);
+                const formattedDate = `${dateObj.getFullYear()}/${(dateObj.getMonth()+1).toString().padStart(2,'0')}/${dateObj.getDate().toString().padStart(2,'0')} ${dateObj.getHours().toString().padStart(2,'0')}:${dateObj.getMinutes().toString().padStart(2,'0')}`;
+                
+                // XSS 対策: テキストをエスケープ
+                const safeUsername = escapeHtml(msg.username) || '名無し';
+                const safeText = escapeHtml(msg.text);
+                
+                html += `
+                    <div class="message-card" data-id="${msg.id}">
+                        <div class="message-header">
+                            <span class="username">${safeUsername}</span>
+                            <span class="date">${formattedDate}</span>
+                        </div>
+                        <div class="message-text">${safeText}</div>
+                        <button class="delete-btn" data-id="${msg.id}">🗑 削除</button>
+                    </div>
+                `;
+            }
+            messageBoard.innerHTML = html;
+            
+            // 削除ボタンにイベントを再バインド
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const id = btn.getAttribute('data-id');
+                    if(id) deleteMessageById(id);
+                });
+            });
+            
+            updateMessageCount();
+        }
+        
+        // シンプルなXSSエスケープ
+        function escapeHtml(str) {
+            if(!str) return '';
+            return str.replace(/[&<>]/g, function(m) {
+                if(m === '&') return '&amp;';
+                if(m === '<') return '&lt;';
+                if(m === '>') return '&gt;';
+                return m;
+            }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+                return c;
+            });
+        }
+        
+        // ----- メッセージ削除機能 -----
+        function deleteMessageById(id) {
+            const beforeCount = messages.length;
+            messages = messages.filter(msg => msg.id !== id);
+            if(messages.length !== beforeCount) {
+                saveMessages();
+                renderBoard();
+            }
+        }
+        
+        // ----- 新規メッセージ投稿 -----
+        function postMessage() {
+            let username = usernameInput.value.trim();
+            let text = messageInput.value.trim();
+            
+            // バリデーション
+            if(text === "") {
+                alert("メッセージ内容を入力してください");
+                return;
+            }
+            if(username === "") {
+                username = "名無しさん";
+            }
+            if(username.length > 30) {
+                username = username.substring(0,30);
+            }
+            if(text.length > 300) {
+                alert("メッセージは300文字以内にしてください");
+                return;
+            }
+            
+            const newMessage = {
+                id: Date.now() + '-' + Math.random().toString(36).substring(2, 8),
+                username: username,
+                text: text,
+                timestamp: new Date().toISOString()
+            };
+            
+            messages.unshift(newMessage);  // 配列先頭に追加（新しい順で表示したいため）
+            // ただし全体を新しい順に保つために render でソートするのでOK
+            saveMessages();
+            renderBoard();
+            
+            // 入力欄クリア
+            messageInput.value = "";
+            usernameInput.value = username;  // 名無し補完した場合も表示維持
+            updateCharCount();
+            
+            // ちょっとした演出：スクロール
+            if(messageBoard.firstChild) {
+                messageBoard.scrollTop = 0;
+            }
+        }
+        
+        // 文字カウンター更新
+        function updateCharCount() {
+            const len = messageInput.value.length;
+            charCountSpan.innerText = len;
+            if(len > 280) {
+                charCountSpan.style.color = "#ffb347";
+            } else {
+                charCountSpan.style.color = "#7c9eb0";
+            }
+        }
+        
+        // 初期化とイベントリスナー
+        function init() {
+            loadMessages();
+            
+            sendBtn.addEventListener('click', () => {
+                postMessage();
+            });
+            
+            messageInput.addEventListener('input', () => {
+                updateCharCount();
+                if(messageInput.value.length > 300) {
+                    messageInput.value = messageInput.value.substring(0,300);
+                    updateCharCount();
+                }
+            });
+            
+            usernameInput.addEventListener('input', () => {
+                if(usernameInput.value.length > 30) {
+                    usernameInput.value = usernameInput.value.substring(0,30);
+                }
+            });
+            
+            // エンターキーで投稿 (ctrl+enter でも可)
+            messageInput.addEventListener('keydown', (e) => {
+                if(e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+                    e.preventDefault();
+                    postMessage();
+                } else if(e.key === 'Enter' && !e.shiftKey) {
+                    // 普通のEnterで送信したい場合は好みだが、改行したい場合とぶつかるため、Ctrl+Enterにしておく
+                    // 好みで単体Enterも可。今回は普通Enterは改行、Ctrl+Enterで送信とする。
+                    // そのままでOK
+                }
+            });
+            
+            updateCharCount();
+        }
+        
+        init();
+    })();
+</script>
+</body>
+</html>
